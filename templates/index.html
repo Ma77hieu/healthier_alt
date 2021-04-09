@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Creative - Start Bootstrap Theme</title>
+    <title>Alternative nutrition</title>
     <!-- Favicon-->
     {% load static %}
-    <link rel="icon" type="image/x-icon" href="{% static 'css/styles.css'%}""../static/assets/img/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{% static 'css/styles.css'%}" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -27,13 +27,24 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'assets/img/portfolio/fullsize/logo_pur_beurre.png' %}" width="30" height="30"
+                    class="d-inline-block align-top mx-1" alt="" href="#page-top">
+                Pur beurre
+            </a>
+            <!-- <a class="navbar-brand js-scroll-trigger" href="#page-top">Pur beurre</a> -->
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+                    </form>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">
+                            <img src="{% static 'assets/img/portfolio/thumbnails/carrot.png' %}">
+                        </a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
@@ -204,9 +215,12 @@
         </div>
     </section>
     <!-- Footer-->
-    <footer class="bg-light py-5">
+    <!-- <footer class="bg-dark py-5"> -->
+    <footer class="navbar bg-dark py-5" id="footer">
         <div class="container">
-            <div class="small text-center text-muted">Copyright © 2020 - Start Bootstrap</div>
+            <a class="col nav-item js-scroll-trigger text-right" href="{% url 'legal' %}">Mentions
+                légales</a>
+            <a class="col nav-item js-scroll-trigger text-left" href="#contact">Contact</a>
         </div>
     </footer>
     <!-- Bootstrap core JS-->
