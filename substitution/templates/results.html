@@ -1,0 +1,58 @@
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+<!-- Masthead-->
+<!-- <div class="masthead  d-block justify-content-center align-items-center "
+    style="height:30rem;min-height:15rem;background:rgba(0, 0, 0, 0.356)" id="aliment_searched">
+    <div class="h1">Un aliment
+    </div>
+</div> -->
+<!-- About-->
+<div class="page-section bg-dark" id="searched_product">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="text-white col-lg-8 text-center">
+                <p class="h2 mb-5">
+                    l'aliment cherché
+                </p>
+                <!-- <div class="row justify-content-center px-2">
+                    <div class="col-md-6 col-sm-12 px-2">
+                        <img src="{% static 'assets/img/colette_250x200.png' %}" alt="">
+                        <h3 class="text-white mt-3 mb-5">Colette</h3>
+                    </div>
+                    <div class="col-md-6 col-sm-12 px-2">
+                        <img src="{% static 'assets/img/remi_250x200.png' %}" alt="">
+                        <h3 class="text-white mt-3 mb-5">Rémi</h3>
+                    </div>
+                </div> -->
+                <!-- <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact-->
+<section class="page-section" id="contact">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="mt-0">Contactez-nous</h2>
+                <hr class="divider my-4" />
+                <p class="text-muted mb-5">Une question, une remarque, un produit non référencé? N'hésitez pas à
+                    nous
+                    contacter!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
+                <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
+                <div>+0 00 00 00 00 00</div>
+            </div>
+            <div class="col-lg-4 mr-auto text-center">
+                <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
+                <!-- Make sure to change the email address in BOTH the anchor text and the link target below!-->
+                <a class="d-block" href="mailto:mail@mail.com">mail@mail.com</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
