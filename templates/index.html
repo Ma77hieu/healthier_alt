@@ -9,18 +9,20 @@
     <title>Alternative nutrition</title>
     <!-- Favicon-->
     {% load static %}
-    <link rel="icon" type="image/x-icon" href="{% static 'css/styles.css'%}" />
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico'%}" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <!-- <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
-        rel="stylesheet" type="text/css" />
+        rel="stylesheet" type="text/css" /> -->
     <!-- Third party plugin CSS-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
         rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet" type="text/css">
 </head>
 
 <body id="page-top">
@@ -28,27 +30,35 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="{% static 'assets/img/portfolio/fullsize/logo_pur_beurre.png' %}" width="30" height="30"
-                    class="d-inline-block align-top mx-1" alt="" href="#page-top">
+                <img src="{% static 'assets/img/portfolio/fullsize/logo_pur_beurre.png' %}" width="50" height="50"
+                    class="d-inline-block align-center mx-1" alt="" href="#page-top">
                 Pur beurre
             </a>
             <!-- <a class="navbar-brand js-scroll-trigger" href="#page-top">Pur beurre</a> -->
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            <button class="navbar-toggler navbar-toggler-right " type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0 d-flex align-items-center">
                     <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control-dark mr-sm-2" type="search" placeholder="Chercher"
+                        <input class="form-control-light mr-sm-4" type="search" placeholder=" Chercher"
                             aria-label="Search">
                         <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
                     </form>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">
-                            <img src="{% static 'assets/img/portfolio/thumbnails/carrot.png' %}">
-                        </a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                    <span class="row d-flex align-items-center p-2">
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger p-2 p-md-1" href="#about">
+                                <img src="{% static 'assets/img/portfolio/thumbnails/user.png' %}" width="25"
+                                    height="25">
+                            </a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger p-2 p-md-1" href="#services">
+                                <img src="{% static 'assets/img/portfolio/thumbnails/carrot.png' %}" width="50"
+                                    height="50">
+                            </a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger p-2 p-md-1" href="#portfolio">
+                                <img src="{% static 'assets/img/portfolio/thumbnails/exit.png' %}" width="25"
+                                    height="25">
+                            </a></li>
+                    </span>
                 </ul>
             </div>
         </div>
@@ -59,9 +69,10 @@
     <!-- <footer class="bg-dark py-5"> -->
     <footer class="navbar bg-dark py-5" id="footer">
         <div class="container">
-            <a class="col nav-item js-scroll-trigger text-right" href="{% url 'legal' %}">Mentions
+            <a class="col nav-item js-scroll-trigger text-center text-md-right text-white"
+                href="{% url 'legal' %}">Mentions
                 légales</a>
-            <a class="col nav-item js-scroll-trigger text-left" href="#contact">Contact</a>
+            <a class="col nav-item js-scroll-trigger text-center text-md-left text-white" href="#contact">Contact</a>
         </div>
     </footer>
     <!-- Bootstrap core JS-->
