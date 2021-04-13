@@ -236,6 +236,7 @@ th {
 label {
   display: inline-block;
   margin-bottom: 0.5rem;
+  margin-top: 1rem;
 }
 
 button {
@@ -10239,3 +10240,7 @@ hr.light {
   font-size:40px;
 }
 /* end of custom for detailprod.html page*/
+
+.label {
+  margin-top:1rem;
+}
