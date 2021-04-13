@@ -1,58 +1,111 @@
 {% extends "index.html" %}
 {% block content %}
 {% load static %}
-<!-- Masthead-->
-<!-- <div class="masthead  d-block justify-content-center align-items-center "
-    style="height:30rem;min-height:15rem;background:rgba(0, 0, 0, 0.356)" id="aliment_searched">
-    <div class="h1">Un aliment
-    </div>
-</div> -->
-<!-- About-->
-<div class="page-section bg-dark" id="searched_product">
+<!-- searched product-->
+<div class="page-section bg-dark bg-results-custom" id="searched_product"
+    style="background:url(https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg)">
+    <!-- background image: api field "image_front_small_url" based on the product searched by the user -->
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="text-white col-lg-8 text-center">
+            <div class="text-white col-lg-8 text-center ">
                 <p class="h2 mb-5">
                     l'aliment cherché
+                    <!--return the api field "generic_name" or "product_name" based on the product searched by the user-->
                 </p>
-                <!-- <div class="row justify-content-center px-2">
-                    <div class="col-md-6 col-sm-12 px-2">
-                        <img src="{% static 'assets/img/colette_250x200.png' %}" alt="">
-                        <h3 class="text-white mt-3 mb-5">Colette</h3>
-                    </div>
-                    <div class="col-md-6 col-sm-12 px-2">
-                        <img src="{% static 'assets/img/remi_250x200.png' %}" alt="">
-                        <h3 class="text-white mt-3 mb-5">Rémi</h3>
-                    </div>
-                </div> -->
-                <!-- <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a> -->
             </div>
         </div>
     </div>
 </div>
-<!-- Contact-->
-<section class="page-section" id="contact">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <h2 class="mt-0">Contactez-nous</h2>
-                <hr class="divider my-4" />
-                <p class="text-muted mb-5">Une question, une remarque, un produit non référencé? N'hésitez pas à
-                    nous
-                    contacter!</p>
+<!-- Alternatives-->
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card m-3">
+                <span class="nutriscore A">A</span>
+                <!-- nutriscore: api field  "nutriscore_grade"-->
+                <img class="card-img-top mx-auto mt-2"
+                    src="https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg"
+                    alt="alterntaive product image" style="width: 200px;">
+                <!-- card image: api field "image_front_small_url"-->
+                <div class="card-body text-center">
+                    <h5 class="card-title">Card title</h5>
+                    <!-- card title: api field "generic_name" or "product_name" -->
+                    <a href="#page-top">
+                        <img class="m-1" src="{% static 'assets/img/icons/save.png' %}" alt="icone enregistrer">
+                        <!-- need to create the right interaction when save icon clicked -->
+                    </a>
+                    <span class="card-text">Sauvegarder</span>
+                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
             </div>
+
         </div>
-        <div class="row">
-            <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
-                <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
-                <div>+0 00 00 00 00 00</div>
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card m-3">
+                <span class="nutriscore B">B</span>
+                <img class="card-img-top mx-auto mt-2"
+                    src="https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg"
+                    alt="alterntaive product image" style="width: 200px;">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Card title</h5>
+                    <a href="#page-top">
+                        <img class="m-1" src="{% static 'assets/img/icons/save.png' %}" alt="icone enregistrer">
+                    </a>
+                    <span class="card-text">Sauvegarder</span>
+                </div>
             </div>
-            <div class="col-lg-4 mr-auto text-center">
-                <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
-                <!-- Make sure to change the email address in BOTH the anchor text and the link target below!-->
-                <a class="d-block" href="mailto:mail@mail.com">mail@mail.com</a>
+
+        </div>
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card m-3">
+                <span class="nutriscore C">C</span>
+                <img class="card-img-top mx-auto mt-2"
+                    src="https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg"
+                    alt="alterntaive product image" style="width: 200px;">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Card title</h5>
+                    <a href="#page-top">
+                        <img class="m-1" src="{% static 'assets/img/icons/save.png' %}" alt="icone enregistrer">
+                    </a>
+                    <span class="card-text">Sauvegarder</span>
+                </div>
             </div>
+
+        </div>
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card m-3">
+                <span class="nutriscore D">D</span>
+                <img class="card-img-top mx-auto mt-2"
+                    src="https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg"
+                    alt="alterntaive product image" style="width: 200px;">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Card title</h5>
+                    <a href="#page-top">
+                        <img class="m-1" src="{% static 'assets/img/icons/save.png' %}" alt="icone enregistrer">
+                    </a>
+                    <span class="card-text">Sauvegarder</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card m-3">
+                <span class="nutriscore E">E</span>
+                <img class="card-img-top mx-auto mt-2"
+                    src="https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg"
+                    alt="alterntaive product image" style="width: 200px;">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Card title</h5>
+                    <a href="#page-top">
+
+                        <img class="m-1" src="{% static 'assets/img/icons/save.png' %}" alt="icone enregistrer">
+                    </a>
+                    <span class="card-text">Sauvegarder</span>
+                </div>
+            </div>
+
         </div>
     </div>
-</section>
+</div>
+
 {% endblock %}

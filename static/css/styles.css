@@ -10153,3 +10153,43 @@ hr.light {
 .text-white-75 {
   color: rgba(255, 255, 255, 0.75);
 }
+
+/* custom class for the results page header background */
+.bg-results-custom{
+  background-size:auto !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+}
+
+/* custom class for the nutriscore display on images of results page */
+.nutriscore{
+  position:absolute;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  top:0px;
+  right:0px;
+  width: 50px;
+  height:50px; 
+  border-radius: 10px;
+  background-color: grey;
+  color:white;
+  font-size:2rem;
+  font-weight: bold;
+}
+.nutriscore.A {
+  background-color: #038141;
+}
+.nutriscore.B {
+  background-color: #85bb2f;
+}
+.nutriscore.C {
+  background-color: #fecb02;
+}
+.nutriscore.D {
+  background-color: #ee8100;
+}
+.nutriscore.E {
+  background-color: #e63e11;
+}
