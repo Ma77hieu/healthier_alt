@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('generic.urls')),
     path('legal', include('generic.urls')),
     path('results', include('substitution.urls')),
+    path('details', include('substitution.urls')),
 ]

@@ -10162,7 +10162,7 @@ hr.light {
   background-attachment: scroll !important;
 }
 
-/* custom class for the nutriscore display on images of results page */
+/* custom classes for the nutriscore display on images of results.html */
 .nutriscore{
   position:absolute;
   display:flex;
@@ -10193,3 +10193,49 @@ hr.light {
 .nutriscore.E {
   background-color: #e63e11;
 }
+/* end of custom for resultst page*/
+
+/* custom class for the nutriscore display on images of detailprod.html  */
+.nutriscale{
+  font-size:30px;
+  color:white;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;;
+  margin: 1rem;
+}
+.nutriscale .A{
+  background-color: #038141;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-left:1rem;
+  padding:1rem;
+}
+
+.nutriscale .B {
+  background-color: #85bb2f;
+  padding:1rem;
+}
+.nutriscale .C {
+  background-color: #fecb02;
+  padding:1rem;
+}
+.nutriscale .D {
+  background-color: #ee8100;
+  padding:1rem;
+}
+
+.nutriscale .E{
+  background-color: #e63e11;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-right:1rem;
+  padding:1rem;
+}
+
+.selected{
+  border-radius: 15px;
+  margin: 7px;
+  font-size:40px;
+}
+/* end of custom for detailprod.html page*/

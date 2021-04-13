@@ -23,12 +23,16 @@
             <div class="card m-3">
                 <span class="nutriscore A">A</span>
                 <!-- nutriscore: api field  "nutriscore_grade"-->
-                <img class="card-img-top mx-auto mt-2"
-                    src="https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg"
-                    alt="alterntaive product image" style="width: 200px;">
+                <a href="{% url 'details'%}">
+                    <img class="card-img-top mx-auto mt-2"
+                        src="https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg"
+                        alt="alterntaive product image" style="width: 200px;">
+                </a>
                 <!-- card image: api field "image_front_small_url"-->
                 <div class="card-body text-center">
-                    <h5 class="card-title">Card title</h5>
+                    <a href="{% url 'details'%}">
+                        <h5 class="card-title">Card title</h5>
+                    </a>
                     <!-- card title: api field "generic_name" or "product_name" -->
                     <a href="#page-top">
                         <img class="m-1" src="{% static 'assets/img/icons/save.png' %}" alt="icone enregistrer">
