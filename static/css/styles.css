@@ -10053,7 +10053,7 @@ hr.light {
     color: rgba(0, 0, 0, 1);
   }
   #mainNav .navbar-brand:hover {
-    color: #fff;
+    color: rgb(87, 87, 87);
   }
   #mainNav .navbar-nav .nav-item .nav-link {
     color: rgba(255, 255, 255, 0.7);

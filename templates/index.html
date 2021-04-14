@@ -31,7 +31,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{% url 'home'%}">
                     <img src="{% static 'assets/img/logo/logo_pur_beurre.png' %}" width="50" height="50"
                         class="d-inline-block align-center mx-1" alt="" href="#page-top">
                     Pur beurre
@@ -50,7 +50,8 @@
                                     href="{% url 'signin'%}">
                                     <img src="{% static 'assets/img/icons/user.png' %}" width="25" height="25">
                                 </a></li>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger p-2 p-md-1" href="#services">
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger p-2 p-md-1"
+                                    href="{% url 'results'%}">
                                     <img src="{% static 'assets/img/icons/carrot.png' %}" width="50" height="50">
                                 </a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger p-2 p-md-1" href="#portfolio">
@@ -71,7 +72,8 @@
             <a class="col nav-item js-scroll-trigger text-center text-md-right text-white"
                 href="{% url 'legal' %}">Mentions
                 légales</a>
-            <a class="col nav-item js-scroll-trigger text-center text-md-left text-white" href="#contact">Contact</a>
+            <a class="col nav-item js-scroll-trigger text-center text-md-left text-white"
+                href="{% url 'home' %}">Contact</a>
         </div>
     </footer>
     <!-- Bootstrap core JS-->

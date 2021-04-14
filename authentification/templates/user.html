@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+<!-- welcome message-->
+<div class="page-section bg-dark bg-results-custom p-3" id="welcome"
+    style="background:url(../assets/img/bg-masthead.jpg)">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="text-white col-lg-8 text-center ">
+                <p class="h2 mb-5">
+                    Bonjour utilisateur
+                    <!--get the user first name-->
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Inscription ou connexion-->
+<div class="container my-5 h-50 ">
+    <div class="row d-flex justify-content-center mb-4">
+        <h3 class="text-center">Votre email enregistré:</h3>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6 col-10 d-flex justify-content-center">
+            <div class=" p-2 border">mail@mail.com</div>
+            <!--get the user email-->
+        </div>
+    </div>
+</div>
+{% endblock %}
