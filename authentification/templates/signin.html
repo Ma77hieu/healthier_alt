@@ -1,4 +1,7 @@
 {% extends "index.html" %}
+{% block title %}
+<title>Connexion/Inscription</title>
+{% endblock %}
 {% block content %}
 {% load static %}
 <!-- welcome message-->
@@ -23,10 +26,10 @@
             <form class="">
                 <label for="userName" class="form-label">Nom d'utilisateur</label>
                 <input type="text" id="userName" class="form-control"
-                    aria-label="champ nom d'utilisateur pour l'inscription">
+                    aria-label="champ nom d'utilisateur pour la connexion" required>
                 <label for="inputPassword" class="form-label">Mot de passe</label>
                 <input type="password" id="inputPassword" class="form-control"
-                    aria-label="champ mot de passe pour l'inscription">
+                    aria-label="champ mot de passe pour la connexion" required>
                 <div class="row mt-4">
                     <div class="col-12 text-center my-4">
                         <button class="btn bg-primary my-2 my-sm-0 " type="submit">
@@ -42,12 +45,13 @@
             <form class="">
                 <label for="userNameSignup" class="form-label">Nom d'utilisateur</label>
                 <input type="text" id="userNameSignup" class="form-control"
-                    aria-label="champ nom d'utilisateur pour l'inscription">
+                    aria-label="champ nom d'utilisateur pour l'inscription" required>
                 <label for="inputPasswordSignup" class="form-label">Mot de passe</label>
                 <input type="password" id="inputPasswordSignup" class="form-control"
-                    aria-label="champ mot de passe pour l'inscription">
+                    aria-label="champ mot de passe pour l'inscription" required>
                 <label for="emailSignup" class="form-label">Email</label>
-                <input type="mail" id="emailSignup" class="form-control" aria-label="champ email pour l'inscription">
+                <input type="mail" id="emailSignup" class="form-control" aria-label="champ email pour l'inscription"
+                    required>
                 <label for="first_nameSignup" class="form-label">Prénom</label>
                 <input type="text" id="first_nameSignup" class="form-control"
                     aria-label="champ Prénom pour l'inscription">

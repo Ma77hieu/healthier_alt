@@ -6,15 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    {% block title %}
     <title>Alternative nutrition</title>
+    {% endblock %}
     <!-- Favicon-->
     {% load static %}
     <link rel="icon" type="image/x-icon" href="{% static 'assets/img/icons/favicon.ico'%}" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-    <!-- <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
-        rel="stylesheet" type="text/css" /> -->
     <!-- Third party plugin CSS-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
         rel="stylesheet" />
@@ -23,6 +22,8 @@
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet" type="text/css">
+    <!-- Font awesome script-->
+    <script src="https://kit.fontawesome.com/47ef80ac93.js" crossorigin="anonymous"></script>
 </head>
 
 <body style="padding-top:90px;" id="page-top">
@@ -48,14 +49,15 @@
                         <span class="row d-flex align-items-center p-2">
                             <li class="nav-item"><a class="nav-link js-scroll-trigger p-2 p-md-1"
                                     href="{% url 'signin'%}">
-                                    <img src="{% static 'assets/img/icons/user.png' %}" width="25" height="25">
+                                    <!-- <img src="{% static 'assets/img/icons/user.png' %}" width="25" height="25"> -->
+                                    <i class="fas fa-user" style="font-size:32px;color:black;"></i>
                                 </a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger p-2 p-md-1"
                                     href="{% url 'results'%}">
                                     <img src="{% static 'assets/img/icons/carrot.png' %}" width="50" height="50">
                                 </a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger p-2 p-md-1" href="#portfolio">
-                                    <img src="{% static 'assets/img/icons/exit.png' %}" width="25" height="25">
+                                    <i class="fas fa-sign-out-alt" style="font-size:2rem;color:black;"></i>
                                 </a></li>
                         </span>
                     </ul>
@@ -73,7 +75,7 @@
                 href="{% url 'legal' %}">Mentions
                 légales</a>
             <a class="col nav-item js-scroll-trigger text-center text-md-left text-white"
-                href="{% url 'home' %}">Contact</a>
+                href="{% url 'home' %}#contact">Contact</a>
         </div>
     </footer>
     <!-- Bootstrap core JS-->

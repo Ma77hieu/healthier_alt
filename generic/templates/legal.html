@@ -1,8 +1,22 @@
-<head>
-    <title>Mentions légales</title>
-</head>
+{% extends "index.html" %}
+{% block title %}
+<title>Mentions légales</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="page-section bg-dark bg-results-custom p-2" id="searched_product">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="text-white col-lg-8 text-center ">
+                <p class="h2 mb-5">
+                    Mentions légales
+                </p>
+            </div>
+        </div>
+    </div>
 
-<body>
-    <p>Voici les mentions légales</p>
-    <a>https://fontawesome.com/license</a>
-</body>
+</div>
+<div class="container m-5">
+    <a class="m-3 p-3">https://fontawesome.com/license</a>
+</div>
+{% endblock %}
