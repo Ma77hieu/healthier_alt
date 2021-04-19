@@ -22,19 +22,20 @@
 <!-- Alternatives-->
 <div class="container">
     <div class="row">
+        {% if products %}
+        {% for product in products %}
         <div class="col-12 col-md-6 col-lg-3">
             <div class="card m-3">
-                <span class="nutriscore A">A</span>
+                <span class="nutriscore A">{{product.nutrition_grade}}</span>
                 <!-- nutriscore: api field  "nutriscore_grade"-->
                 <a href="{% url 'details'%}">
-                    <img class="card-img-top mx-auto mt-2"
-                        src="https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg"
+                    <img class="card-img-top mx-auto mt-2" src="{{product.image_front_small_url}}"
                         alt="alterntaive product image" style="width: 200px;">
                 </a>
                 <!-- card image: api field "image_front_small_url"-->
                 <div class="card-body text-center">
                     <a href="{% url 'details'%}">
-                        <h5 class="card-title">Card title</h5>
+                        <h5 class="card-title">{{product.product_name}}</h5>
                     </a>
                     <!-- card title: api field "generic_name" or "product_name" -->
                     <a href="#page-top">
@@ -45,9 +46,14 @@
                     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                 </div>
             </div>
-
         </div>
-        <div class="col-12 col-md-6 col-lg-3">
+        {% endfor %}
+        {% else %}
+        <p class="text-danger">Aucun résultat</p>
+        {% endif %}
+
+
+        <!-- <div class="col-12 col-md-6 col-lg-3">
             <div class="card m-3">
                 <span class="nutriscore B">B</span>
                 <img class="card-img-top mx-auto mt-2"
@@ -111,7 +117,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> -->
     </div>
 </div>
 

@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from substitution.models import Product
 
 
 def results(request):
-    return render(request, 'results.html')
+    products = Product.objects.all()
+    return render(request, 'results.html', {'products': products})
 
 
 def details(request):
