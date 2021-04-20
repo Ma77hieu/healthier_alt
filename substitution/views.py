@@ -7,5 +7,6 @@ def results(request):
     return render(request, 'results.html', {'products': products})
 
 
-def details(request):
-    return render(request, 'detailprod.html')
+def details(request, product_id):
+    product = Product.objects.get(pk=product_id)
+    return render(request, 'detailprod.html', {'product': product})

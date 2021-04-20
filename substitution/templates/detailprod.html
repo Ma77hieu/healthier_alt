@@ -6,14 +6,12 @@
 {% load static %}
 <!-- searched product-->
 <div class="page-section bg-dark bg-results-custom" id="searched_product"
-    style="background:url(https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg)">
-    <!-- background image: api field "image_front_small_url" based on the product searched by the user -->
+    style="background:url({{product.image_front_small_url}})">
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="text-white col-lg-8 text-center ">
-                <p class="h2 mb-5">
-                    l'aliment cherché
-                    <!--return the api field "generic_name" or "product_name" based on the product searched by the user-->
+            <div class="col-lg-8 text-center ">
+                <p class="h2 mb-5 bg-semi-transparent">
+                    {{product.product_name}}
                 </p>
             </div>
         </div>
@@ -28,7 +26,6 @@
                 <div class="A">A</div>
                 <div class="B">B</div>
                 <div class="C selected">C</div>
-                <!-- need to adapt the selected score to the actual score of the product -->
                 <div class="D">D</div>
                 <div class="E">E</div>
             </div>
@@ -36,12 +33,12 @@
         <div class="col-12 col-md-6">
             <h3 class="text-center my-4">Repères nutritionnels pour 100g:</h3>
             <ul>
-                <li>carbohydrates : 34g</li>
-                <!-- for each line use the "nutriments" dict of the api response
-                use the key ending with "_100g" and the corresponding value-->
-                <li> cocoa : 70g</li>
-                <li> energy-kcal: 566</li>
-                <li> fat: 41g</li>
+                <li>énergie (kj) : {{product.energy_kj}}</li>
+                <li>énergie (kcal) : {{product.energy_kcal}}</li>
+                <li>gras (g) : {{product.energy_kcal}}</li>
+                <li>fibres (g) : {{product.fiber}}</li>
+                <li>protéines (g) : {{product.proteins}}</li>
+                <li>sel (g) : {{product.salt}}</li>
             </ul>
         </div>
 
@@ -49,9 +46,7 @@
     <div class="row mt-4">
         <div class="col-12 text-center my-4">
             <button class="btn bg-primary my-2 my-sm-0 " type="submit">
-                <a class="text-white"
-                    href="https://fr.openfoodfacts.org/produit/3046920022651/excellence-70-cacao-noir-intense-lindt"
-                    target="_blank"> la fiche d'OpenFoodFacts</a>
+                <a class="text-white" href="{{product.url}}" target="_blank"> la fiche d'OpenFoodFacts</a>
             </button>
             <!-- on button link, redirection with target blank on the "url" value of the api response -->
         </div>
