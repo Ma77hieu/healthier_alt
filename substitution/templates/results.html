@@ -12,7 +12,7 @@
         <div class="row justify-content-center">
             <div class="text-white col-lg-8 text-center ">
                 <p class="h2 mb-5">
-                    l'aliment cherché
+                    {{searched_product}}
                     <!--return the api field "generic_name" or "product_name" based on the product searched by the user-->
                 </p>
             </div>
@@ -23,7 +23,7 @@
 <div class="container">
     <div class="row">
         {% if products %}
-        {% for product in products %}
+        {% for product in page_obj%}
         <div class="col-12 col-md-6 col-lg-3">
             <div class="card m-3 text-center">
                 <span class="nutriscore A">{{product.nutrition_grade}}</span>
@@ -34,7 +34,7 @@
                 </a>
                 <!-- card image: api field "image_front_small_url"-->
                 <div class="card-body text-center">
-                    <a href="{{product.id}}/details">
+                    <a href="details/{{product.id}}">
                         <h5 class="card-title">{{product.product_name}}</h5>
                     </a>
                     <!-- card title: api field "generic_name" or "product_name" -->
@@ -48,77 +48,26 @@
             </div>
         </div>
         {% endfor %}
-        {% else %}
-        <p class="text-danger">Aucun résultat</p>
-        {% endif %}
-
-
-        <!-- <div class="col-12 col-md-6 col-lg-3">
-            <div class="card m-3">
-                <span class="nutriscore B">B</span>
-                <img class="card-img-top mx-auto mt-2"
-                    src="https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg"
-                    alt="alterntaive product image" style="width: 200px;">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Card title</h5>
-                    <a href="#page-top">
-                        <img class="m-1" src="{% static 'assets/img/icons/save.png' %}" alt="icone enregistrer">
-                    </a>
-                    <span class="card-text">Sauvegarder</span>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-12 col-md-6 col-lg-3">
-            <div class="card m-3">
-                <span class="nutriscore C">C</span>
-                <img class="card-img-top mx-auto mt-2"
-                    src="https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg"
-                    alt="alterntaive product image" style="width: 200px;">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Card title</h5>
-                    <a href="#page-top">
-                        <img class="m-1" src="{% static 'assets/img/icons/save.png' %}" alt="icone enregistrer">
-                    </a>
-                    <span class="card-text">Sauvegarder</span>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-12 col-md-6 col-lg-3">
-            <div class="card m-3">
-                <span class="nutriscore D">D</span>
-                <img class="card-img-top mx-auto mt-2"
-                    src="https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg"
-                    alt="alterntaive product image" style="width: 200px;">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Card title</h5>
-                    <a href="#page-top">
-                        <img class="m-1" src="{% static 'assets/img/icons/save.png' %}" alt="icone enregistrer">
-                    </a>
-                    <span class="card-text">Sauvegarder</span>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-12 col-md-6 col-lg-3">
-            <div class="card m-3">
-                <span class="nutriscore E">E</span>
-                <img class="card-img-top mx-auto mt-2"
-                    src="https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg"
-                    alt="alterntaive product image" style="width: 200px;">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Card title</h5>
-                    <a href="#page-top">
-
-                        <img class="m-1" src="{% static 'assets/img/icons/save.png' %}" alt="icone enregistrer">
-                    </a>
-                    <span class="card-text">Sauvegarder</span>
-                </div>
-            </div>
-
-        </div> -->
     </div>
-</div>
+    <div class="pagination my-4">
+        <span class="step-links mx-auto">
+            {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; 1ère page</a>
+            <a href="?page={{ page_obj.previous_page_number }}"> | Précédente | </a>
+            {% endif %}
 
+            <span class="current">
+                Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"> | Suivante |</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">dernière page &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    {% else %}
+    <p class="text-danger">Aucun résultat</p>
+    {% endif %}
+</div>
 {% endblock %}

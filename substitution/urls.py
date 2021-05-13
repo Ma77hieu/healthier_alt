@@ -3,6 +3,6 @@ from substitution import views
 
 urlpatterns = [
     path('results', views.results, name="results"),
-    path('<int:product_id>/details', views.details, name="details"),
+    path('details/<int:product_id>', views.details, name="details"),
     path('user/<int:user>/favorites', views.favorites, name="favorites"),
 ]

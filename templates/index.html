@@ -42,9 +42,11 @@
                     aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto my-2 my-lg-0 d-flex align-items-center">
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control-light mr-sm-4" type="search" placeholder=" Chercher"
-                                aria-label="Search">
+                        <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'results'%}">
+                            {% csrf_token %}
+                            <!-- {{form}} -->
+                            <input class="form-control-light mr-sm-4" name="searched_product" type="search"
+                                placeholder=" Chercher" aria-label="Search">
                         </form>
                         <span class="row d-flex align-items-center p-2">
                             <li class="nav-item"><a class="nav-link js-scroll-trigger p-2 p-md-1"

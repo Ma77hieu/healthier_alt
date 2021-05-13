@@ -140,3 +140,42 @@ class OffApiData():
 if __name__ == "__main__":
     data = OffApiData()
     data.get_info()
+
+# def check_value(value):
+#     if (value == "" OR value is None):
+#         return False
+#     return True
+
+# save = True
+# json = p_json["products"][prod]
+
+# datas = {}
+
+# TO_CHECK = {
+#     "base" : {
+#         "product_name": "product_name_fr",
+#         "nutriscore": "nutriscore_grade",
+#         "url": "url",
+#         "image": "image_front_small_url"
+#     },
+#     "nutriments" : {
+#         "energy_kj": "energy_100g",
+#         "energy_kcal": "energy-kcal_100g",
+#         "fat": "fat_100g",
+#         "fiber": "fiber_100g",
+#         "proteins": "proteins_100g",
+#         "salt": "salt_100g"
+#     }
+# }
+
+# while save:
+#     for tata in ["base", "nutriments"]:
+#         for key, value in TO_CHECK[tata].items():
+#             if( datas["key"] and check_value(value) ):
+#                 datas["key"] = value
+#             else:
+#                 save = False
+#                 break
+#     extracted_product = Product(**datas)
+#     extracted_product.save()
+#     save = False
