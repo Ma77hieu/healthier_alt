@@ -54,8 +54,8 @@
     <div class="pagination my-4">
         <span class="step-links mx-auto">
             {% if page_obj.has_previous %}
-            <a href="?page=1&search_product={{request.GET.searched_product}}">&laquo; 1ère page</a>
-            <a href="?page={{ page_obj.previous_page_number }}&search_product={{request.GET.searched_product}}"> |
+            <a href="?page=1&searched_product={{request.GET.searched_product}}">&laquo; 1ère page</a>
+            <a href="?page={{ page_obj.previous_page_number }}&searched_product={{request.GET.searched_product}}"> |
                 Précédente |
             </a>
             {% endif %}
