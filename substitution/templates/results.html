@@ -12,7 +12,7 @@
         <div class="row justify-content-center">
             <div class="text-white col-lg-8 text-center ">
                 <p class="h2 mb-5">
-                    {{searched_product}}
+                    {{request.GET.searched_product}}
                     <!--return the api field "generic_name" or "product_name" based on the product searched by the user-->
                 </p>
             </div>
@@ -49,6 +49,32 @@
         </div>
         {% endfor %}
     </div>
+    {% if request.GET.searched_product %}
+    <!-- pagination in case of multiple results page -->
+    <div class="pagination my-4">
+        <span class="step-links mx-auto">
+            {% if page_obj.has_previous %}
+            <a href="?page=1&search_product={{request.GET.searched_product}}">&laquo; 1ère page</a>
+            <a href="?page={{ page_obj.previous_page_number }}&search_product={{request.GET.searched_product}}"> |
+                Précédente |
+            </a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&searched_product={{request.GET.searched_product}}"> |
+                Suivante |</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}&search_product={{request.GET.searched_product}}">dernière
+                page
+                &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    {% else %}
+    <!-- pagination in case of single results page -->
     <div class="pagination my-4">
         <span class="step-links mx-auto">
             {% if page_obj.has_previous %}
@@ -66,8 +92,10 @@
             {% endif %}
         </span>
     </div>
-    {% else %}
-    <p class="text-danger">Aucun résultat</p>
     {% endif %}
+</div>
+{% else %}
+<p class="text-danger">Aucun résultat</p>
+{% endif %}
 </div>
 {% endblock %}

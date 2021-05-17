@@ -10,7 +10,7 @@ def results(request):
     paginator = Paginator(products, per_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    searched_product = request.POST.get('searched_product')
+    searched_product = request.GET.get('searched_product')
     return render(request, 'results.html', {
         'products': products,
         'searched_product': searched_product,

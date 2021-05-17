@@ -17,7 +17,7 @@
                 <h2 class="text-white-75 font-weight-light mb-5">Trouvez un produit de substitution pour ceux que vous
                     consommez tous les jours
                 </h2>
-                <form method="POST" action="{% url 'results'%}">
+                <form method="GET" action="{% url 'results'%}">
                     {% csrf_token %}
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Produit" aria-label="product search bar"
