@@ -11,7 +11,7 @@
         <div class="row justify-content-center">
             <div class="text-white col-lg-8 text-center ">
                 <p class="h2 mb-5">
-                    Bonjour utilisateur
+                    Bonjour {{form.first_name}}
                     <!--get the user first name-->
                 </p>
             </div>
@@ -25,7 +25,7 @@
     </div>
     <div class="row d-flex justify-content-center">
         <div class="col-md-6 col-10 d-flex justify-content-center">
-            <div class=" p-2 border">mail@mail.com</div>
+            <div class=" p-2 border">{{form.email}}</div>
             <!--get the user email-->
         </div>
     </div>

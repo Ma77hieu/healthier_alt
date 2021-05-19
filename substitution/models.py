@@ -1,5 +1,11 @@
 from django.db import models
+# if __name__ == "main":
+#     from authentification.models import User
+# else:
+#     from ..authentification.models import User
 from authentification.models import User
+# from django.contrib.auth.models import User
+
 
 # Create your models here.
 

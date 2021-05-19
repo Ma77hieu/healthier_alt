@@ -9,4 +9,4 @@ NBR_CAT = 3
 NBR_PROD = 10
 
 # Number of results per page in the results page
-NBR_RESULTS_PER_PAGE = 5
+NBR_RESULTS_PER_PAGE = 8
