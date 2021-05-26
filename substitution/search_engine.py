@@ -6,13 +6,21 @@ class Substitutes():
         #     self.ids = find_alt(user_input)
         pass
 
-    def find_alt(self, searched_product):
+    def find_alt(self, searched_products):
         list_searched_words = self.isolate_words(searched_products)
         words_to_compare = self.trim(list_searched_words)
-        searched_product_id = self.find_prod(words_to_compare)
-        prod_infos = self.get_prod_infos(searched_product_id)
-        subs_id = self.get_subs_id(prod_infos.cat_name, prod_infos.nutriscore)
-        return subs_id
+        searched_product_id = self.find_prod(words_to_compare)[0]
+        if self.result_found:
+            prod_infos = self.get_prod_infos(searched_product_id)
+            prod_from_cat_ids = self.get_prod_id_from_cat(
+                prod_infos[0])
+            self.subs_id = self.get_alt_ids(
+                prod_infos[1], prod_from_cat_ids)
+            self.prod_found = True
+            return self.subs_id, self.prod_found
+        else:
+            self.subs_id = []
+            self.prod_found = False
 
     def isolate_words(self, input_string):
         """isolate different words from input"""
@@ -33,7 +41,7 @@ class Substitutes():
         return self.trimmed_words_list
 
     def find_prod(self, words_list):
-        """compare one by one the elements of the list of isolated 
+        """compare one by one the elements of the list of isolated
         words to each product names in DB,
         return the ID of matching product"""
         keep_search = True
@@ -66,16 +74,44 @@ class Substitutes():
     def get_prod_infos(self, found_product_id):
         """get category and nutriscore of matching product"""
         category = Categories.objects.filter(product_id=found_product_id)
-        self.cat_name = category.name
-        self.nutriscore = Product.objects.get(
-            pk=found_product_id).values('nutrition_grade')
+        print("category:{}".format(category))
+        self.cat_name = category.values('name')[0]['name']
+        print("category NAME:{}".format(self.cat_name))
+        self.found_prod = Product.objects.filter(
+            pk=found_product_id)
+        print("prod found:{}".format(self.found_prod))
+        self.nutriscore = self.found_prod.values('nutrition_grade')[
+            0]['nutrition_grade']
         return self.cat_name, self.nutriscore
 
-    def get_subs_id(self, cat_name, nutriscore):
-        """get IDs of all products from the same category with
-        better nutriscore"""
-        self.alts_id = Categories.objects.filter(name=cat_name).product_id
-        return self.alts_id
+    def get_prod_id_from_cat(self, cat_name):
+        """get IDs of all products from the same category"""
+        self.prod_from_cat = Categories.objects.filter(name=cat_name)
+        print("prod from cat:{}".format(self.prod_from_cat))
+        self.ids_prod_from_cat = []
+        for prod in self.prod_from_cat.values('product_id'):
+            print("PROD:{}".format(prod))
+            prod_id = prod['product_id']
+            self.ids_prod_from_cat.append(prod_id)
+            print("ids of prod from cat:{}".format(self.ids_prod_from_cat))
+        return self.ids_prod_from_cat
+
+    def get_alt_ids(self, nutriscore, prod_id_list):
+        """get IDs of all products with better nutriscore
+         within product ids list received as argument"""
+        regex_nutri = '[a-' + nutriscore + ']'
+        print("regex_nutri:{}".format(regex_nutri))
+        self.alts = Product.objects.filter(
+            pk__in=prod_id_list,
+            nutrition_grade__regex=regex_nutri)
+        print("alts with better nutriscore:{}".format(self.alts))
+        self.ids_alts = []
+        for prod in self.alts.values('id'):
+            print("ALT n°:{}".format(prod))
+            prod_id = prod['id']
+            self.ids_alts.append(prod_id)
+            print("potential alts:{}".format(self.ids_alts))
+        return self.ids_alts
 
 
 if __name__ == "__main__":

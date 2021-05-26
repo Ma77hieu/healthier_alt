@@ -30,14 +30,14 @@ class searchEngineTests(TestCase):
         self.substitute.find_prod(self.assertion_trimmed_words_list)
         prod_id_1 = self.substitute.searched_product_id
         is_prod_found_1 = self.substitute.result_found
-        self.assertEqual(prod_id_1, 1)
+        self.assertEqual(prod_id_1, 127)
         self.assertEqual(is_prod_found_1, True)
 
     def test_find_prod_Abricot(self):
         self.substitute.find_prod(self.assertion_trimmed_words_list_2)
         prod_id_2 = self.substitute.searched_product_id
         is_prod_found_2 = self.substitute.result_found
-        self.assertEqual(prod_id_2, 59)
+        self.assertEqual(prod_id_2, 105)
         self.assertEqual(is_prod_found_2, True)
 
     def test_find_prod_FAIL(self):
@@ -46,3 +46,29 @@ class searchEngineTests(TestCase):
         is_prod_found_3 = self.substitute.result_found
         self.assertEqual(prod_id_3, '-1')
         self.assertEqual(is_prod_found_3, False)
+
+    def test_get_prod_infos(self):
+        self.substitute.get_prod_infos(125)
+        cat = self.substitute.cat_name
+        nutri = self.substitute.nutriscore
+        self.assertEqual(cat, 'Snacks')
+        self.assertEqual(nutri, 'd')
+
+    def test_get_prod_id_from_cat(self):
+        self.substitute.get_prod_id_from_cat('Snacks')
+        ids = self.substitute.ids_prod_from_cat
+        self.assertEqual(
+            ids, [125, 126, 127, 128, 129, 130, 131, 132, 133, 134])
+
+    def test_get_alt_ids(self):
+        self.substitute.get_alt_ids(
+            'd', [125, 126, 127, 128, 129, 130, 131, 132, 133, 134])
+        alts = self.substitute.ids_alts
+        self.assertEqual(alts, [125, 126, 129, 130, 131, 132])
+
+    def test_global_search_engine(self):
+        global_alt_ids = self.substitute.find_alt(
+            "Un truc avec de l Abricot")
+        print("global: {}".format(global_alt_ids))
+        self.assertEqual(global_alt_ids, (
+                         [105, 106, 109, 110, 112], True))
