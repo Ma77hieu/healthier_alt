@@ -132,8 +132,9 @@ class OffApiData():
                                             proteins=self.proteins,
                                             salt=self.salt)
                 extracted_product.save()
-            cat_saved_DB = Categories(name=cat_name, product=extracted_product)
-            cat_saved_DB.save()
+                cat_saved_DB = Categories(
+                    name=cat_name, product=extracted_product)
+                cat_saved_DB.save()
         self.data_loaded = True
 
 
