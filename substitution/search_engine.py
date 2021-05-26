@@ -1,4 +1,4 @@
-from models import Product, Categories
+from substitution.models import Product, Categories
 
 
 class Substitutes():
@@ -33,17 +33,33 @@ class Substitutes():
         return self.trimmed_words_list
 
     def find_prod(self, words_list):
-        """compare list of isolated words to each product names in DB,
-        return the ID of mathcing product"""
+        """compare one by one the elements of the list of isolated 
+        words to each product names in DB,
+        return the ID of matching product"""
         keep_search = True
         while keep_search:
             for word in words_list:
-                match_product = Product.objects.filter(name__contains=word)
-                if match_product:
-                    self.searched_product_id = match_product.id
+                print("word evaluated: {}".format(word))
+                # self.all_products = Product.objects.all()
+                # print("ALL PROD:{}".format(self.all_products))
+                self.match_product = Product.objects.filter(
+                    product_name__icontains=word)
+                print("matching products:{}".format(self.match_product))
+                self.match_ids = self.match_product.values('id')
+                if self.match_ids:
+                    print("IDs matching products:{}".format(
+                        self.match_ids))
+                    print("MATCH FOUND")
+                    self.searched_product_id = (
+                        self.match_ids[0]['id'])
+                    print("id  product found:{}".format(
+                        self.searched_product_id))
                     self.result_found = True
                     keep_search = False
-            self.result_found = False
+                else:
+                    print("MATCH NOT FOUND")
+                    self.searched_product_id = '-1'
+                    self.result_found = False
             keep_search = False
         return self.searched_product_id, self.result_found
 
