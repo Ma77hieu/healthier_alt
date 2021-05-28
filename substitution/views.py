@@ -23,6 +23,17 @@ from substitution.search_engine import Substitutes
 def results(request):
     """uses the search engine to find a matching product and 
     the alternatives, returns paginated results"""
+    # print("user_id: {}".format(request.user.id))
+    fav_saved = False
+
+    if request.user.id:
+        fav_product_id = request.GET.get('fav_prod')
+        if fav_product_id:
+            fav = Favorites(product_id=fav_product_id,
+                            user_id=request.user.id)
+            fav.save()
+            fav_saved = True
+    print("fav_saved: {}".format(fav_saved))
     searched_product = request.GET.get('searched_product')
     print("SEARCHED PROD: {}".format(searched_product))
     alt = Substitutes()
@@ -41,7 +52,8 @@ def results(request):
         'products': products,
         'searched_product': searched_product,
         'search_match_product': search_match_product,
-        'page_obj': page_obj})
+        'page_obj': page_obj,
+        'fav_saved': fav_saved})
 
 
 def details(request, product_id):
@@ -61,10 +73,13 @@ def favorites(request, logged_user_id):
     return render(request, 'favorites.html', {'fav_products': user_favs})
 
 
-# def add_favorites(request, current_user_id, fav_product_id):
-#     fav = Favorites(product_id=fav_product_id,
-#                     user_id=current_user_id)
-#     fav.save()
+# def add_favorites(request, fav_product_id, logged_user_id=None):
+#     if logged_user_id:
+#         fav = Favorites(product_id=fav_product_id,
+#                         user_id=logged_user_id)
+#         fav.save()
+#     else:
+
 #     paginator = Paginator(products, per_page)
 #     page_number = request.GET.get('page')
 #     page_obj = paginator.get_page(page_number)

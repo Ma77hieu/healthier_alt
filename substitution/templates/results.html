@@ -23,6 +23,23 @@
         </div>
     </div>
 </div>
+<!-- Message in case a favorite is saved-->
+{% if fav_saved %}
+<div class="container">
+    <div class="row">
+        {% if fav_saved is True %}
+        <div class="alert alert-success" role="alert">
+            Product saved in your favorites
+        </div>
+        {% endif %}
+        {% if fav_saved is False %}
+        <div class="alert alert-warning" role="alert">
+            Something went wrong, please try again
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
 <!-- Alternatives-->
 <div class="container">
     <div class="row">
@@ -42,12 +59,17 @@
                         <h5 class="card-title">{{product.product_name}}</h5>
                     </a>
                     <!-- card title: api field "generic_name" or "product_name" -->
-                    <a href="addfavorites/user={{user.id}}&prod={{product.id}}">
-                        <img class="m-1" src="{% static 'assets/img/icons/save.png' %}" alt="icone enregistrer">
-                        <!-- need to create the right interaction when save icon clicked -->
-                        <span class="card-text">Sauvegarder</span>
-                    </a>
-                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    <form method="GET" action="{% url 'results'%}">
+                        {% csrf_token %}
+                        <input type="hidden" name="searched_product" value="{{request.GET.searched_product}}">
+                        <input type="hidden" name="fav_prod" value="{{product.id}}">
+                        <button>
+                            <img class="m-1" src="{% static 'assets/img/icons/save.png' %}" alt="icone enregistrer">
+                            <!-- need to create the right interaction when save icon clicked -->
+                            <span class="card-text">Sauvegarder</span>
+                        </button>
+                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </form>
                 </div>
             </div>
         </div>
