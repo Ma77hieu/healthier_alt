@@ -6,13 +6,17 @@
 {% load static %}
 <!-- searched product-->
 <div class="page-section bg-dark bg-results-custom" id="searched_product"
-    style="background:url(https://static.openfoodfacts.org/images/products/762/221/044/9283/front_fr.415.200.jpg)">
+    style="background:url({{search_match_product.image_front_small_url}})">
     <!-- background image: api field "image_front_small_url" based on the product searched by the user -->
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="text-white col-lg-8 text-center ">
+                <p class="h2 mt-5 mb-2">
+                    Votre recherche: {{request.GET.searched_product}}
+                    <!--return the api field "generic_name" or "product_name" based on the product searched by the user-->
+                </p>
                 <p class="h2 mb-5">
-                    {{request.GET.searched_product}}
+                    Produit trouvé: {{search_match_product.product_name}}
                     <!--return the api field "generic_name" or "product_name" based on the product searched by the user-->
                 </p>
             </div>
@@ -28,9 +32,9 @@
             <div class="card m-3 text-center">
                 <span class="nutriscore A">{{product.nutrition_grade}}</span>
                 <!-- nutriscore: api field  "nutriscore_grade"-->
-                <a href="{{product.id}}/details">
+                <a href="details/{{product.id}}">
                     <img class="card-img-top mx-auto mt-2 w-auto h-auto" src="{{product.image_front_small_url}}"
-                        alt="alterntaive product image" style="max-width: 200px;max-height:300px">
+                        alt="alternative product image" style="max-width: 200px;max-height:300px">
                 </a>
                 <!-- card image: api field "image_front_small_url"-->
                 <div class="card-body text-center">
@@ -38,11 +42,11 @@
                         <h5 class="card-title">{{product.product_name}}</h5>
                     </a>
                     <!-- card title: api field "generic_name" or "product_name" -->
-                    <a href="#page-top">
+                    <a href="addfavorites/user={{user.id}}&prod={{product.id}}">
                         <img class="m-1" src="{% static 'assets/img/icons/save.png' %}" alt="icone enregistrer">
                         <!-- need to create the right interaction when save icon clicked -->
+                        <span class="card-text">Sauvegarder</span>
                     </a>
-                    <span class="card-text">Sauvegarder</span>
                     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                 </div>
             </div>
