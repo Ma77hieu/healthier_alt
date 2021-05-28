@@ -133,7 +133,3 @@ STATICFILES_DIRS = (
 )
 
 AUTH_USER_MODEL = 'authentification.User'
-
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-)
