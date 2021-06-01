@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from substitution.models import Product, Categories, Favorites
+from authentification.models import User
 
 
 class Command(BaseCommand):
@@ -24,5 +25,7 @@ class Command(BaseCommand):
         product.delete()
         category = Categories.objects.all()
         category.delete()
+        users = User.objects.filter(id__gt=1)
+        users.delete()
         self.stdout.write(self.style.SUCCESS(
             ' Successfully erased databases '))
