@@ -10,3 +10,6 @@ NBR_PROD = 10
 
 # Number of results per page in the results page
 NBR_RESULTS_PER_PAGE = 8
+
+# ERROR: user not logged_in
+NOT_LOGGED_IN = "you need to log in before you can do this action"

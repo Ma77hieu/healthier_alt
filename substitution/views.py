@@ -2,6 +2,7 @@ from django.shortcuts import render
 from substitution.models import Product, Favorites
 from django.core.paginator import Paginator
 from .constants import NBR_RESULTS_PER_PAGE as per_page
+from .constants import NOT_LOGGED_IN
 from substitution.search_engine import Substitutes
 
 
@@ -21,7 +22,7 @@ from substitution.search_engine import Substitutes
 
 
 def results(request):
-    """uses the search engine to find a matching product and 
+    """uses the search engine to find a matching product and
     the alternatives, returns paginated results"""
     # print("user_id: {}".format(request.user.id))
     fav_saved = False
@@ -62,29 +63,29 @@ def details(request, product_id):
     return render(request, 'detailprod.html', {'product': product})
 
 
-def favorites(request, logged_user_id):
+def mesaliments(request):
     """access the saved favorites of a user based on logged user id"""
-    user_favs = Favorites.objects.filter(user_id=logged_user_id)
-    # favs_ids_list = []
-    # for fav in user_favs:
-    #     favs_ids_list.append(fav.product_id)
-    # user_fav_prod = Product.objects.filter(pk__in=favs_ids_list)
-    # user_fav_prod = Product.objects.get(pk=2)
-    return render(request, 'favorites.html', {'fav_products': user_favs})
+    if request.user.id:
+        favorites = Favorites.objects.filter(
+            user_id=request.user.id).values('product_id')
+        # print("FAVORITES OF THE USER: {}".format(favorites))
+        favs = []
+        for favorite in favorites:
+            # print("FAVORITE: {}".format(favorite))
+            # print("FAVORITE PRODUCT ID: {}".format(favorite["product_id"]))
+            favs.append(favorite["product_id"])
 
+        # print("IDs FAVORITES OF THE USER: {}".format(favs))
+        products = Product.objects.filter(pk__in=favs)
+        paginator = Paginator(products, per_page)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        favoritepage = True
+        return render(request, 'results.html', {
+            'products': products,
+            'page_obj': page_obj,
+            'is_favorite_page': favoritepage})
 
-# def add_favorites(request, fav_product_id, logged_user_id=None):
-#     if logged_user_id:
-#         fav = Favorites(product_id=fav_product_id,
-#                         user_id=logged_user_id)
-#         fav.save()
-#     else:
-
-#     paginator = Paginator(products, per_page)
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
-#     searched_product = request.GET.get('searched_product')
-#     return render(request, 'results.html', {
-#         'products': products,
-#         'searched_product': searched_product,
-#         'page_obj': page_obj})
+    else:
+        error = NOT_LOGGED_IN
+        return render(request, 'home.html', {'error': error})

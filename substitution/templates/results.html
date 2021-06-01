@@ -59,6 +59,7 @@
                         <h5 class="card-title">{{product.product_name}}</h5>
                     </a>
                     <!-- card title: api field "generic_name" or "product_name" -->
+                    {% if not is_favorite_page %}
                     <form method="GET" action="{% url 'results'%}">
                         {% csrf_token %}
                         <input type="hidden" name="searched_product" value="{{request.GET.searched_product}}">
@@ -70,6 +71,7 @@
                         </button>
                         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                     </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
