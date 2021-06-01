@@ -17,6 +17,23 @@
         </div>
     </div>
 </div>
+{% if signup %}
+<div class="container">
+    <div class="row">
+        {% if signup is True %}
+        <div class="alert alert-success w-100 my-4" role="alert">
+            <p>Félicitations vous êtes désormais inscrit.</p>
+            <p>Vous pouvez dès à présent sauvegarder des alternatives à vos aliments favoris =).</p>
+        </div>
+        {% endif %}
+        {% if signup is False %}
+        <div class="alert alert-warning" role="alert">
+            La création de votre compte à échoué =(, merci de réessayer.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
 <!-- Inscription ou connexion-->
 <div class="container my-5">
     <div class="row">

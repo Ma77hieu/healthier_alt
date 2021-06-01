@@ -48,14 +48,20 @@
                             <input class="form-control-light mr-sm-4" name="searched_product" type="search"
                                 placeholder=" Chercher" aria-label="Search">
                         </form>
-                        <span class="row d-flex align-items-center p-2">
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger p-2 p-md-1"
+                        <span class="row align-items-center p-2">
+                            <li class="nav-item d-inline-flex"><a class="nav-link js-scroll-trigger p-2 p-md-1"
                                     href="{% url 'signin'%}">
                                     <!-- <img src="{% static 'assets/img/icons/user.png' %}" width="25" height="25"> -->
-                                    <i class="fas fa-user" style="font-size:32px;color:black;"></i>
+                                    <i class="fas fa-user" style="font-size:32px;color:black;z-index:-4"></i>
+                                    {% if request.user.id %}
+                                    <div class="cm-usr">
+                                        <i class="fas fa-check "></i>
+                                    </div>
+                                    {% endif %}
+
                                 </a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger p-2 p-md-1"
-                                    href="{% url 'results'%}">
+                                    href="{% url 'mesaliments'%}">
                                     <img src="{% static 'assets/img/icons/carrot.png' %}" width="50" height="50">
                                 </a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger p-2 p-md-1"
