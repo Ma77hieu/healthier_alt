@@ -23,11 +23,18 @@
         <div class="col-12 col-md-6">
             <h3 class="text-center mt-4">Nutriscore:</h3>
             <div class="nutriscale d-flex d-inline-block">
-                <div class="A">A</div>
+                {% for nutri in nutriscore_list %}
+                {%if product.nutrition_grade is nutri %}
+                <div class="{{nutri}} selected">{{nutri}}</div>
+                {% else %}
+                <div class="{{nutri}}">{{nutri}}</div>
+                {% endif %}
+                {% endfor %}
+                <!-- <div class="A">A</div>
                 <div class="B">B</div>
                 <div class="C selected">C</div>
                 <div class="D">D</div>
-                <div class="E">E</div>
+                <div class="E">E</div> -->
             </div>
         </div>
         <div class="col-12 col-md-6">

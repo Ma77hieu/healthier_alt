@@ -64,7 +64,8 @@ def results(request):
 def details(request, product_id):
     """access a specific product details page based on product id"""
     product = Product.objects.get(pk=product_id)
-    return render(request, 'detailprod.html', {'product': product})
+    nutriscore_list = ['a', 'b', 'c', 'd', 'e']
+    return render(request, 'detailprod.html', {'product': product, 'nutriscore_list': nutriscore_list})
 
 
 def mesaliments(request):

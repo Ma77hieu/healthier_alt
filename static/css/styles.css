@@ -10198,6 +10198,7 @@ hr.light {
 
 /* custom class for the nutriscore display on images of detailprod.html  */
 .nutriscale{
+  text-transform: capitalize;
   font-size:30px;
   color:white;
   justify-content: center;
@@ -10205,7 +10206,7 @@ hr.light {
   font-weight: bold;;
   margin: 1rem;
 }
-.nutriscale .A{
+.nutriscale .a{
   background-color: #038141;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -10213,20 +10214,20 @@ hr.light {
   padding:1rem;
 }
 
-.nutriscale .B {
+.nutriscale .b {
   background-color: #85bb2f;
   padding:1rem;
 }
-.nutriscale .C {
+.nutriscale .c {
   background-color: #fecb02;
   padding:1rem;
 }
-.nutriscale .D {
+.nutriscale .d {
   background-color: #ee8100;
   padding:1rem;
 }
 
-.nutriscale .E{
+.nutriscale .e{
   background-color: #e63e11;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -10239,6 +10240,24 @@ hr.light {
   margin: 7px;
   font-size:40px;
 }
+
+.nutriscale .a.selected{
+  border-radius:0px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  margin-right:1rem;
+  padding:1rem;
+}
+
+.nutriscale .e.selected{
+  border-radius:0px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin-right:1rem;
+  padding:1rem;
+}
+
+
 /* end of custom for detailprod.html page*/
 
 .label {
