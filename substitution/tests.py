@@ -9,6 +9,7 @@ from mock import Mock
 class searchEngineTests(TestCase):
     fixtures = ['substitution.json']
     substitute = Substitutes()
+    specific_charac_string = "aaeeee  uu"
     assertion_list = ['a', 'DU', 'saucisson', 'Nutella', '42']
     assertion_trimmed_words_list = [
         'saucisson', 'Nutella']
@@ -16,6 +17,11 @@ class searchEngineTests(TestCase):
         'iubiube', 'Abricot']
     assertion_trimmed_words_list_3 = [
         'iubiube', 'iqzerubgilteub', 'haej', 'k,ufipoaqerg']
+
+    def test_replace_spec_characs(self):
+        normalized_string = self.substitute.replace_spec_characs(
+            "àaéeèe' ùu")
+        self.assertEqual(normalized_string, self.specific_charac_string)
 
     def test_isolate_words(self):
         test_words_list = self.substitute.isolate_words(

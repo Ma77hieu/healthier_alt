@@ -7,7 +7,8 @@ class Substitutes():
         pass
 
     def find_alt(self, searched_products):
-        list_searched_words = self.isolate_words(searched_products)
+        normalized_string = self.replace_spec_characs(searched_products)
+        list_searched_words = self.isolate_words(normalized_string)
         words_to_compare = self.trim(list_searched_words)
         searched_product_id = self.find_prod(words_to_compare)[0]
         if self.result_found:
@@ -21,6 +22,21 @@ class Substitutes():
         else:
             self.subs_id = []
             self.prod_found = False
+
+    def replace_spec_characs(self, input_string):
+        """make sure that specific characters such as 'é' 'à' are replaced with equivalents"""
+        characs_and_subs = {"é": "e", "è": "e", "à": "a", "'": " ", "ù": "u"}
+        count = 0
+        normalized_string = input_string
+        for charac in characs_and_subs:
+            # print("charac evaluated: {}".format(charac))
+            # print("to be replaced: {}".format(characs_and_subs[charac]))
+            normalized_string = normalized_string.replace(
+                charac,
+                characs_and_subs[charac])
+            count += 1
+            # print("NORMALIZED STRING: {}".format(normalized_string))
+        return normalized_string
 
     def isolate_words(self, input_string):
         """isolate different words from input"""
