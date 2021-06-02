@@ -12,4 +12,8 @@ NBR_PROD = 10
 NBR_RESULTS_PER_PAGE = 8
 
 # ERROR: user not logged_in
-NOT_LOGGED_IN = "you need to log in before you can do this action"
+NOT_LOGGED_IN = "Vous devez vous identifier pour pouvoir effectuer cette action"
+
+# ERROR: no match for searched product in the DB
+NO_PROD_FOUND = """Désolé, aucun produit de notre base de données ne correspond 
+à vorte recherche\nessayez par exemple 'Nutella', ou 'produit à l'abricot'"""

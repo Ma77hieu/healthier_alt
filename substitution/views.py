@@ -2,7 +2,7 @@ from django.shortcuts import render
 from substitution.models import Product, Favorites
 from django.core.paginator import Paginator
 from .constants import NBR_RESULTS_PER_PAGE as per_page
-from .constants import NOT_LOGGED_IN
+from .constants import NOT_LOGGED_IN, NO_PROD_FOUND
 from substitution.search_engine import Substitutes
 
 
@@ -38,23 +38,27 @@ def results(request):
     searched_product = request.GET.get('searched_product')
     print("SEARCHED PROD: {}".format(searched_product))
     alt = Substitutes()
-    alt_products_ids = alt.find_alt(searched_product)[0]
-    print("PRODUCTS ID: {}".format(alt_products_ids))
-    search_match_product_id = alt.searched_product_id
-    search_match_product = Product.objects.get(pk=search_match_product_id)
-    print("SEARCH_MATCH_PRODUCT: {}".format(search_match_product))
-    print("SEARCH_MATCH_PRODUCT IMAGE: {}".format(
-        search_match_product.image_front_small_url))
-    products = Product.objects.filter(pk__in=alt_products_ids)
-    paginator = Paginator(products, per_page)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'results.html', {
-        'products': products,
-        'searched_product': searched_product,
-        'search_match_product': search_match_product,
-        'page_obj': page_obj,
-        'fav_saved': fav_saved})
+    if alt.find_alt(searched_product):
+        alt_products_ids = alt.find_alt(searched_product)[0]
+        print("PRODUCTS ID: {}".format(alt_products_ids))
+        search_match_product_id = alt.searched_product_id
+        search_match_product = Product.objects.get(pk=search_match_product_id)
+        print("SEARCH_MATCH_PRODUCT: {}".format(search_match_product))
+        print("SEARCH_MATCH_PRODUCT IMAGE: {}".format(
+            search_match_product.image_front_small_url))
+        products = Product.objects.filter(pk__in=alt_products_ids)
+        paginator = Paginator(products, per_page)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'results.html', {
+            'products': products,
+            'searched_product': searched_product,
+            'search_match_product': search_match_product,
+            'page_obj': page_obj,
+            'fav_saved': fav_saved})
+    else:
+        error = NO_PROD_FOUND
+        return render(request, 'home.html', {'error': error})
 
 
 def details(request, product_id):
