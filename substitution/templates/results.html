@@ -61,7 +61,8 @@
         {% for product in page_obj%}
         <div class="col-12 col-md-6 col-lg-3">
             <div class="card m-3 text-center">
-                <span class="nutriscore A">{{product.nutrition_grade}}</span>
+
+                <span class="nutriscore {{product.nutrition_grade}}">{{product.nutrition_grade}}</span>
                 <!-- nutriscore: api field  "nutriscore_grade"-->
                 <a href="details/{{product.id}}">
                     <img class="card-img-top mx-auto mt-2 w-auto h-auto" src="{{product.image_front_small_url}}"
