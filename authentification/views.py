@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
+from substitution.constants import LOG_OUT_OK
 
 
 # Create your views here.
@@ -79,7 +80,8 @@ def logout_user(request):
     logout(request)
     print("user logged out")
     print("REQUEST.USER: {}".format(request.user))
-    return render(request, 'home.html')
+    user_message = LOG_OUT_OK
+    return render(request, 'home.html', {'user_message': user_message})
 
 
 def user(request):
