@@ -14,9 +14,15 @@ NBR_RESULTS_PER_PAGE = 8
 # ERROR: user not logged_in
 NOT_LOGGED_IN = "Vous devez vous identifier pour pouvoir effectuer cette action"
 
+# ERROR: Invalid credentials
+INVALID_CREDENTIALS = "Une erreur s'est glissée dans votre nom ou votre mot de passe, veuillez reessayer"
+
 # ERROR: no match for searched product in the DB
 NO_PROD_FOUND = """Désolé, aucun produit de notre base de données ne correspond 
 à vorte recherche\nessayez par exemple 'Nutella', ou 'produit à l'abricot'"""
 
 # user_message: log out is ok
 LOG_OUT_OK = "Votre déconnexion a bien été prise en compte"
+
+# user_message: log in is ok
+LOG_IN_OK = "Vous êtes désormais identifié"

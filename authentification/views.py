@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
-from substitution.constants import LOG_OUT_OK
+from substitution.constants import LOG_IN_OK, LOG_OUT_OK, INVALID_CREDENTIALS
 
 
 # Create your views here.
@@ -25,10 +25,12 @@ def login_user(request, user_name, pwd, signup):
         return render(request, html_page, {
             'form': logged_user})
     else:
-        print(
-            request, "Unsuccessful registration. Invalid Credentials.")
-        messages.error(
-            request, "Unsuccessful registration. Invalid Credentials.")
+        print(INVALID_CREDENTIALS)
+        return INVALID_CREDENTIALS
+        # print(
+        #     request, "Unsuccessful registration. Invalid Credentials.")
+        # messages.error(
+        #     request, "Unsuccessful registration. Invalid Credentials.")
 
 
 def signup(request):
@@ -62,6 +64,7 @@ def signup(request):
 def signin(request):
     if request.method == "GET":
         form = UserForm()
+        return render(request, 'signin.html', {'form': form})
     elif request.method == "POST":
         print("----\nSIGNIN\n----")
         print("REQUEST.POST:{}".format(request.POST))
@@ -70,9 +73,12 @@ def signin(request):
         user_name = request.POST['username']
         pwd = request.POST['password']
         signup = False
-        login_user(request, user_name, pwd, signup)
-        return redirect('home')
-    return render(request, 'signin.html', {'form': form})
+        login = login_user(request, user_name, pwd, signup)
+        if login == INVALID_CREDENTIALS:
+            form = UserForm()
+            return render(request, 'signin.html', {'form': form, 'error': INVALID_CREDENTIALS})
+        else:
+            return render(request, 'home.html', {'user_message': LOG_IN_OK})
 
 
 def logout_user(request):
