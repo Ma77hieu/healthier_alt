@@ -10281,4 +10281,6 @@ hr.light {
   height:16px;
   border-radius: 50%;
   background-color: green;
+  z-index: 100;
+  position: relative;
 }
