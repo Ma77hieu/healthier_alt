@@ -26,3 +26,6 @@ LOG_OUT_OK = "Votre déconnexion a bien été prise en compte"
 
 # user_message: log in is ok
 LOG_IN_OK = "Vous êtes désormais identifié"
+
+# time between each selenium test
+WAIT_TIME = 2
