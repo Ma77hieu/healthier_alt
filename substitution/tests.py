@@ -1,7 +1,14 @@
 from django.test import TestCase
-from substitution.models import User, Categories, Product
+# from substitution.models import User, Categories, Product
 from substitution.search_engine import Substitutes
-from mock import Mock
+# from decouple import config
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.keys import Keys
+from substitution.constants import NO_PROD_FOUND, WAIT_TIME
+import time
+# from mock import Mock
 
 # Create your tests here.
 
@@ -78,3 +85,67 @@ class searchEngineTests(TestCase):
         print("global: {}".format(global_alt_ids))
         self.assertEqual(global_alt_ids, (
                          [105, 106, 109, 110, 112], True))
+
+
+class MySeleniumTests(StaticLiveServerTestCase):
+    fixtures = ['substitution.json']
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.selenium = WebDriver()
+        cls.selenium.implicitly_wait(10)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super().tearDownClass()
+
+    def test_prod_found(self):
+        timeout = 2
+        searched_prod_displayed = False
+        name_of_match_prod_displayed = False
+        is_product_card = False
+        is_ok = [searched_prod_displayed,
+                 name_of_match_prod_displayed,
+                 is_product_card]
+        to_check = ["trucs à l'abricot",
+                    "Muesli Raisin, Figue, Abricot", "nutriscore"]
+        for both_search_input in [0, 1]:
+            self.selenium.get('{}'.format(self.live_server_url + '/home'))
+            if both_search_input == 0:
+                collapsed_navbar_button = self.selenium.find_element_by_class_name(
+                    "navbar-toggler-icon")
+                collapsed_navbar_button.click()
+            searchbar = self.selenium.find_elements_by_name("searched_product")[
+                both_search_input]
+            searchbar.send_keys("trucs à l'abricot")
+            searchbar.send_keys(Keys.RETURN)
+            WebDriverWait(self.selenium, timeout).until(
+                lambda driver: driver.find_element_by_tag_name('body'))
+            time.sleep(WAIT_TIME)
+            for elem in to_check:
+                if elem in self.selenium.page_source:
+                    is_ok[to_check.index(elem)] = True
+            assert is_ok == [True, True, True]
+
+    def test_prod_NOT_found(self):
+        timeout = 2
+        searched_prod = "izaubfreub"
+        for both_search_input in [0, 1]:
+            self.selenium.get('{}'.format(self.live_server_url + '/home'))
+            if both_search_input == 0:
+                collapsed_navbar_button = self.selenium.find_element_by_class_name(
+                    "navbar-toggler-icon")
+                collapsed_navbar_button.click()
+            searchbar = self.selenium.find_elements_by_name("searched_product")[
+                both_search_input]
+            searchbar.send_keys(searched_prod)
+            searchbar.send_keys(Keys.RETURN)
+            WebDriverWait(self.selenium, timeout).until(
+                lambda driver: driver.find_element_by_tag_name('body'))
+            no_prod_found = False
+            time.sleep(WAIT_TIME)
+            if NO_PROD_FOUND in self.selenium.page_source:
+                no_prod_found = True
+            assert no_prod_found is True
