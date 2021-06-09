@@ -10166,6 +10166,7 @@ hr.light {
 /* custom classes for the nutriscore display on images of results.html */
 .nutriscore{
   position:absolute;
+  text-transform: capitalize;
   display:flex;
   align-items: center;
   justify-content: center;

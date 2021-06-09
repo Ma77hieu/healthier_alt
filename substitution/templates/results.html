@@ -1,6 +1,10 @@
 {% extends "index.html" %}
 {% block title %}
+{% if is_favorite_page%}
+<title>Mes aliments sauvegardés</title>
+{% else %}
 <title>Résultats de recherche</title>
+{% endif %}
 {% endblock %}
 {% block content %}
 {% load static %}
@@ -138,7 +142,10 @@
     {% endif %}
 </div>
 {% else %}
-<p class="text-danger">Aucun résultat</p>
+<div class="alert alert-warning my-4" role="alert">
+    Vous n'avez pas enregistré d'alternative à vos produits préférés pour l'instant.</br>
+    Commencez dès à présent en effectuant une recherche et en cliquant sur "sauvegarder" sur le produit de votre choix.
+</div>
 {% endif %}
 </div>
 {% endblock %}

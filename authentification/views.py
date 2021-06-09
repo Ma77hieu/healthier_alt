@@ -28,5 +28,5 @@ def logout_user(request):
 
 
 def user(request):
-    """view managing the acess to the user's page"""
+    """view managing the acess to the user's saveds alternatives page"""
     return render(request, 'user.html')
