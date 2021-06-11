@@ -1,0 +1,82 @@
+[
+    {
+        "model": "substitution.favorites",
+        "pk": 12,
+        "fields": {
+            "product": 112,
+            "user": 31
+        }
+    },
+    {
+        "model": "substitution.favorites",
+        "pk": 13,
+        "fields": {
+            "product": 114,
+            "user": 31
+        }
+    },
+    {
+        "model": "substitution.favorites",
+        "pk": 14,
+        "fields": {
+            "product": 116,
+            "user": 31
+        }
+    },
+    {
+        "model": "substitution.favorites",
+        "pk": 15,
+        "fields": {
+            "product": 118,
+            "user": 31
+        }
+    },
+    {
+        "model": "substitution.favorites",
+        "pk": 16,
+        "fields": {
+            "product": 120,
+            "user": 32
+        }
+    },
+    {
+        "model": "substitution.favorites",
+        "pk": 17,
+        "fields": {
+            "product": 122,
+            "user": 32
+        }
+    },
+    {
+        "model": "substitution.favorites",
+        "pk": 18,
+        "fields": {
+            "product": 124,
+            "user": 33
+        }
+    },
+    {
+        "model": "substitution.favorites",
+        "pk": 19,
+        "fields": {
+            "product": 123,
+            "user": 33
+        }
+    },
+    {
+        "model": "substitution.favorites",
+        "pk": 20,
+        "fields": {
+            "product": 119,
+            "user": 34
+        }
+    },
+    {
+        "model": "substitution.favorites",
+        "pk": 21,
+        "fields": {
+            "product": 121,
+            "user": 34
+        }
+    }
+]

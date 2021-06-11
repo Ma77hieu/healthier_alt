@@ -27,7 +27,6 @@
                 {% else %}
                 <p class="h2 my-5">
                     Vos alternatives sauvegardées:
-                    <!--return the api field "generic_name" or "product_name" based on the product searched by the user-->
                 </p>
                 {% endif %}
             </div>
@@ -45,7 +44,7 @@
         {% endif %}
         {% if fav_saved is False %}
         <div class="alert alert-warning" role="alert">
-            Something went wrong, please try again
+            Il y a eu un souci dans votre requête, merci de réessayer.
         </div>
         {% endif %}
     </div>
@@ -64,7 +63,7 @@
         {% if products %}
         {% for product in page_obj%}
         <div class="col-12 col-md-6 col-lg-3">
-            <div class="card m-3 text-center">
+            <div class="card m-3 text-center" name="product_card">
 
                 <span class="nutriscore {{product.nutrition_grade}}">{{product.nutrition_grade}}</span>
                 <!-- nutriscore: api field  "nutriscore_grade"-->
@@ -142,7 +141,7 @@
     {% endif %}
 </div>
 {% else %}
-<div class="alert alert-warning my-4" role="alert">
+<div class="alert alert-warning my-4" role="alert" name="no_alt_saved_warning">
     Vous n'avez pas enregistré d'alternative à vos produits préférés pour l'instant.</br>
     Commencez dès à présent en effectuant une recherche et en cliquant sur "sauvegarder" sur le produit de votre choix.
 </div>

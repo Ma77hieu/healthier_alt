@@ -45,7 +45,7 @@ class MySeleniumTests(StaticLiveServerTestCase):
         match_label_const = {"username": 'SIGNUP_USERNAME',
                              "password": "SIGNUP_PWD",
                              "email": "SIGNUP_EMAIL",
-                             "first_name": "SIGNUP_LASTNAME"}
+                             "first_name": "SIGNUP_FIRSTNAME"}
         for elem in match_label_const:
             if elem in ["username", "password"]:
                 pos = 1

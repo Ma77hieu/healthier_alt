@@ -39,7 +39,7 @@ class searchEngineTests(TestCase):
         self.assertEqual(trimmed_words_list, self.assertion_trimmed_words_list)
 
     def test_find_prod_Nutella(self):
-        """test the find_prod function of 
+        """test the find_prod function of
         search_engine.py with "Nutella" input"""
         self.substitute.find_prod(self.assertion_trimmed_words_list)
         prod_id_1 = self.substitute.searched_product_id
@@ -56,7 +56,7 @@ class searchEngineTests(TestCase):
         self.assertEqual(is_prod_found_2, True)
 
     def test_find_prod_FAIL(self):
-        """test the 'no product found' scenario of 
+        """test the 'no product found' scenario of
         the find_prod function of search_engine.py"""
         self.substitute.find_prod(self.assertion_trimmed_words_list_3)
         prod_id_3 = self.substitute.searched_product_id
@@ -97,7 +97,7 @@ class searchEngineTests(TestCase):
 
 
 class MySeleniumTests(StaticLiveServerTestCase):
-    fixtures = ['substitution.json', 'users.json']
+    fixtures = ['substitution.json', 'users.json', 'favs.json']
 
     @classmethod
     def setUpClass(cls):
@@ -110,13 +110,37 @@ class MySeleniumTests(StaticLiveServerTestCase):
         cls.selenium.quit()
         super().tearDownClass()
 
-    def user_login(self):
-        """will be used by various tests to mimic the user login"""
+    def user_login(self, NO_ALT=False):
+        """
+        will be used by various tests to mimic the user login
+
+        :Args:
+         - NO_ALT: False by default, connects a user WITH
+         saved alternative products
+         True if we want to connect a user WITHOUT
+         alternatives product saved.
+
+        """
+        self.selenium.get('{}'.format(self.live_server_url + '/signin'))
+        if NO_ALT is False:
+            LOGIN = config('USER_LOGIN')
+            PWD = config('USER_PWD')
+        elif NO_ALT is True:
+            LOGIN = config('NO_ALT_USER_LOGIN')
+            PWD = config('NO_ALT_USER_PWD')
+        username_input = self.selenium.find_elements_by_name("username")[0]
+        username_input.send_keys(LOGIN)
+        password_input = self.selenium.find_elements_by_name("password")[0]
+        password_input.send_keys(PWD)
+        password_input.send_keys(Keys.RETURN)
+
+    def user_login_no_alt(self):
+
         self.selenium.get('{}'.format(self.live_server_url + '/signin'))
         username_input = self.selenium.find_elements_by_name("username")[0]
-        username_input.send_keys(config('USER_LOGIN'))
+        username_input.send_keys(config('NO_ALT_USER_LOGIN'))
         password_input = self.selenium.find_elements_by_name("password")[0]
-        password_input.send_keys(config('USER_PWD'))
+        password_input.send_keys(config('No_ALT_USER_PWD'))
         password_input.send_keys(Keys.RETURN)
 
     def product_search_successfull(self):
@@ -181,7 +205,7 @@ class MySeleniumTests(StaticLiveServerTestCase):
 
     def test_save_alt_anonymous_user(self):
         """tests the alternative product save function
-        scenario where user IS NOT logged in and CANNOT  
+        scenario where user IS NOT logged in and CANNOT
         therefore save alternatives"""
         timeout = 2
         self.product_search_successfull()
@@ -200,7 +224,7 @@ class MySeleniumTests(StaticLiveServerTestCase):
 
     def test_save_alt_logged_user(self):
         """tests the alternative product save function
-        scenario where user IS logged in and CAN  
+        scenario where user IS logged in and CAN
         therefore save alternatives"""
         timeout = 2
         self.user_login()
@@ -250,7 +274,53 @@ class MySeleniumTests(StaticLiveServerTestCase):
         self.selenium.switch_to_window(self.selenium.window_handles[1])
         product_name = "flocons d'avoine - Bjorg - 500g"
         link_OK = False
-        print(self.selenium.find_element_by_tag_name('h1'))
         if product_name == self.selenium.find_element_by_tag_name('h1').text:
             link_OK = True
         assert link_OK is True
+
+    def test_view_alt_no_alt_saved(self):
+        """tests the viewing of saved alts for a user
+        that doessn't have any alts"""
+        self.user_login(True)
+        timeout = 2
+        self.selenium.get('{}'.format(self.live_server_url + '/mesaliments'))
+        WebDriverWait(self.selenium, timeout).until(
+            lambda driver: driver.find_element_by_tag_name('body'))
+        time.sleep(WAIT_TIME)
+        alert_message_displayed = False
+        alert_message = "Vous n'avez pas enregistré d'alternative"
+        if alert_message in self.selenium.page_source:
+            alert_message_displayed = True
+        assert alert_message_displayed is True
+
+    def test_view_alt_OK(self):
+        """tests the viewing of saved alts for a user
+        that have previously saved some"""
+        self.user_login()
+        timeout = 2
+        self.selenium.get('{}'.format(self.live_server_url + '/mesaliments'))
+        WebDriverWait(self.selenium, timeout).until(
+            lambda driver: driver.find_element_by_tag_name('body'))
+        time.sleep(WAIT_TIME)
+        product_displayed = False
+        product_card = self.selenium.find_element_by_name("product_card")
+        if product_card is not None:
+            product_displayed = True
+        assert product_displayed is True
+
+    def test_redirect_home(self):
+        """tests the redirection to the homepage from the legal page"""
+        self.user_login()
+        timeout = 2
+        self.selenium.get('{}'.format(self.live_server_url + '/legal'))
+        self.selenium.find_element_by_name("name_and_logo").click()
+        WebDriverWait(self.selenium, timeout).until(
+            lambda driver: driver.find_element_by_tag_name('body'))
+        time.sleep(WAIT_TIME)
+        redirection = False
+        title_homepage = "du gras, oui, mais de qualité!"
+        h1 = self.selenium.find_element_by_tag_name('h1').text.lower()
+        print("h1: {}".format(h1))
+        if h1 == title_homepage:
+            redirection = True
+        assert redirection is True
