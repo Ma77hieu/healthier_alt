@@ -39,8 +39,8 @@
 <div class="container">
     <div class="row">
         {% if fav_saved is True %}
-        <div class="alert alert-success" role="alert">
-            Product saved in your favorites
+        <div class="alert alert-success my-2" role="alert">
+            Produit enregistré dans vos favoris
         </div>
         {% endif %}
         {% if fav_saved is False %}
@@ -83,7 +83,7 @@
                         {% csrf_token %}
                         <input type="hidden" name="searched_product" value="{{request.GET.searched_product}}">
                         <input type="hidden" name="fav_prod" value="{{product.id}}">
-                        <button>
+                        <button name="save_prod_button">
                             <img class="m-1" src="{% static 'assets/img/icons/save.png' %}" alt="icone enregistrer">
                             <!-- need to create the right interaction when save icon clicked -->
                             <span class="card-text">Sauvegarder</span>
