@@ -24,6 +24,7 @@ class MySeleniumTests(StaticLiveServerTestCase):
         super().tearDownClass()
 
     def test_login(self):
+        """test the user login function with good credentials"""
         timeout = 2
         self.selenium.get('{}'.format(self.live_server_url + '/signin'))
         username_input = self.selenium.find_elements_by_name("username")[0]
@@ -40,6 +41,7 @@ class MySeleniumTests(StaticLiveServerTestCase):
         assert login is True
 
     def test_signup(self):
+        """test the user signup function with good credentials"""
         timeout = 5
         self.selenium.get('{}'.format(self.live_server_url + '/signin'))
         match_label_const = {"username": 'SIGNUP_USERNAME',
@@ -64,6 +66,7 @@ class MySeleniumTests(StaticLiveServerTestCase):
         assert signup is True
 
     def test_logout(self):
+        """test the logout function"""
         self.selenium.get('{}'.format(self.live_server_url + '/home'))
         timeout = 2
         collapsed_navbar_button = self.selenium.find_element_by_class_name(
