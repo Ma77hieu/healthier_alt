@@ -144,7 +144,8 @@ class MySeleniumTests(StaticLiveServerTestCase):
         password_input.send_keys(Keys.RETURN)
 
     def product_search_successfull(self):
-        """will be used by various tests to mimic a successfull product search"""
+        """will be used by various tests to mimic a successfull
+        product search"""
         self.selenium.get('{}'.format(self.live_server_url + '/home'))
         searchbar = self.selenium.find_elements_by_name("searched_product")[1]
         searchbar.send_keys("trucs à l'abricot")
@@ -165,11 +166,13 @@ class MySeleniumTests(StaticLiveServerTestCase):
         for both_search_input in [0, 1]:
             self.selenium.get('{}'.format(self.live_server_url + '/home'))
             if both_search_input == 0:
-                collapsed_navbar_button = self.selenium.find_element_by_class_name(
-                    "navbar-toggler-icon")
+                collapsed_navbar_button = (
+                    self.selenium.find_element_by_class_name(
+                        "navbar-toggler-icon"))
                 collapsed_navbar_button.click()
-            searchbar = self.selenium.find_elements_by_name("searched_product")[
-                both_search_input]
+            searchbar = (
+                self.selenium.find_elements_by_name("searched_product")
+                [both_search_input])
             searchbar.send_keys("trucs à l'abricot")
             searchbar.send_keys(Keys.RETURN)
             WebDriverWait(self.selenium, timeout).until(
@@ -188,11 +191,13 @@ class MySeleniumTests(StaticLiveServerTestCase):
         for both_search_input in [0, 1]:
             self.selenium.get('{}'.format(self.live_server_url + '/home'))
             if both_search_input == 0:
-                collapsed_navbar_button = self.selenium.find_element_by_class_name(
-                    "navbar-toggler-icon")
+                collapsed_navbar_button = (
+                    self.selenium.find_element_by_class_name(
+                        "navbar-toggler-icon"))
                 collapsed_navbar_button.click()
-            searchbar = self.selenium.find_elements_by_name("searched_product")[
-                both_search_input]
+            searchbar = (
+                self.selenium.find_elements_by_name("searched_product")[
+                    both_search_input])
             searchbar.send_keys(searched_prod)
             searchbar.send_keys(Keys.RETURN)
             WebDriverWait(self.selenium, timeout).until(
@@ -213,7 +218,8 @@ class MySeleniumTests(StaticLiveServerTestCase):
             lambda driver: driver.find_element_by_tag_name('body'))
         warning = False
         possible_save = False
-        warning_message = "Vous devez vous identifier pour pouvoir enregistrer"
+        warning_message = ("Vous devez vous identifier "
+                           "pour pouvoir enregistrer")
         save_link = ">Sauvegarder</span>"
         time.sleep(WAIT_TIME)
         if warning_message in self.selenium.page_source:
@@ -245,7 +251,8 @@ class MySeleniumTests(StaticLiveServerTestCase):
         """tests the display of the various informations in the
         product details page"""
         timeout = 2
-        self.selenium.get('{}'.format(self.live_server_url + '/details/109'))
+        self.selenium.get('{}'.format(
+            self.live_server_url + '/details/109'))
         WebDriverWait(self.selenium, timeout).until(
             lambda driver: driver.find_element_by_tag_name('body'))
         searched_prod_displayed = False
@@ -262,9 +269,11 @@ class MySeleniumTests(StaticLiveServerTestCase):
         assert is_ok == [True, True, True]
 
     def test_link_prod_details_page(self):
-        """tests the redirection to an open food fact product info page"""
+        """tests the redirection to an open
+        food fact product info page"""
         timeout = 2
-        self.selenium.get('{}'.format(self.live_server_url + '/details/109'))
+        self.selenium.get('{}'.format(self.live_server_url +
+                                      '/details/109'))
         WebDriverWait(self.selenium, timeout).until(
             lambda driver: driver.find_element_by_tag_name('body'))
         OFF_link_button = self.selenium.find_element_by_name(
@@ -274,7 +283,8 @@ class MySeleniumTests(StaticLiveServerTestCase):
         self.selenium.switch_to_window(self.selenium.window_handles[1])
         product_name = "flocons d'avoine - Bjorg - 500g"
         link_OK = False
-        if product_name == self.selenium.find_element_by_tag_name('h1').text:
+        if product_name == (
+                self.selenium.find_element_by_tag_name('h1').text):
             link_OK = True
         assert link_OK is True
 
@@ -283,7 +293,8 @@ class MySeleniumTests(StaticLiveServerTestCase):
         that doessn't have any alts"""
         self.user_login(True)
         timeout = 2
-        self.selenium.get('{}'.format(self.live_server_url + '/mesaliments'))
+        self.selenium.get('{}'.format(self.live_server_url +
+                                      '/mesaliments'))
         WebDriverWait(self.selenium, timeout).until(
             lambda driver: driver.find_element_by_tag_name('body'))
         time.sleep(WAIT_TIME)
@@ -298,7 +309,8 @@ class MySeleniumTests(StaticLiveServerTestCase):
         that have previously saved some"""
         self.user_login()
         timeout = 2
-        self.selenium.get('{}'.format(self.live_server_url + '/mesaliments'))
+        self.selenium.get('{}'.format(self.live_server_url +
+                                      '/mesaliments'))
         WebDriverWait(self.selenium, timeout).until(
             lambda driver: driver.find_element_by_tag_name('body'))
         time.sleep(WAIT_TIME)

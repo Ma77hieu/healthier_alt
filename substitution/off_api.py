@@ -19,14 +19,11 @@ class OffApiData():
 
     def __init__(self):
         self.data_loaded = False
-        # self.category = Category()
-        # self.product = Product()
         self.cat_list = None
         self.categories = None
         self.product_name = None
         self.nutriscore = None
         self.image = None
-        # self.stores = None
         self.url = None
         self.image = None
         self.energy_kj = None
@@ -67,13 +64,15 @@ class OffApiData():
         Sends a request to the OFF API to receive a list of products
         within a specific category
         """
-        elem = str
+        # elem = str
         for cat_name in self.cat_list:
             for prod in range(0, NBR_PROD):
-                print("loading PRODUCT {} from CAT {} ".format(prod+1, cat_name))
+                print("loading PRODUCT {} from CAT {} "
+                      .format(prod+1, cat_name))
                 products_url = (
                     "https://fr.openfoodfacts.org/cgi/search.pl"
-                    "?action=process&tagtype_0=categories&tag_contains_0"
+                    "?action=process&tagtype_0=categories"
+                    "&tag_contains_0"
                     "=contains&tag_0="
                     + cat_name
                     + '&json=true&page_size='
@@ -83,44 +82,33 @@ class OffApiData():
                 print("products request: {}\n".format(products_url))
                 products = requests.get(products_url)
                 p_json = json.loads(products.content.decode('utf-8'))
-                # to_be_extracted = {"product_name": "product_name_fr",
-                #                    "nutriscore": "nutriscore_grade",
-                #                    "url": "url",
-                #                    "image": "image_front_small_url"}
-                # nutriments = {"energy_kj": "energy_100g",
-                #               "energy_kcal": "energy-kcal_100g",
-                #               "fat": "fat_100g",
-                #               "fiber": "fiber_100g",
-                #               "proteins": "proteins_100g",
-                #               "salt": "salt_100g"}
-                # for key, value in to_be_extracted.items():
-                #     if value in p_json["products"][prod]:
-                #         self.key = p_json["products"][prod][value]
-                #     else:
-                #         self.key = "no_name_in_database"
-                #     print("{} a pour valeur {}".format(key, self.key))
-                # for key, value in nutriments.items():
-                #     if value in p_json["products"][prod]["nutriments"]:
-                #         self.key = p_json["products"][prod]["nutriments"][value]
-                #     else:
-                #         self.key = "0"
-                #     print("{} a pour valeur {}".format(key, self.key))
-                self.product_name = p_json["products"][prod]["product_name_fr"]
+                self.product_name = (
+                    p_json["products"][prod]["product_name_fr"])
                 if "nutriscore_grade" in p_json["products"][prod]:
-                    self.nutriscore = p_json["products"][prod]["nutriscore_grade"]
+                    self.nutriscore = (
+                        p_json["products"][prod]["nutriscore_grade"])
                 self.url = p_json["products"][prod]["url"]
-                self.image = p_json["products"][prod]["image_front_small_url"]
-                self.energy_kj = p_json["products"][prod]["nutriments"]["energy_100g"]
-                if "energy-kcal_100g" in p_json["products"][prod]["nutriments"]:
-                    self.energy_kcal = p_json["products"][prod]["nutriments"]["energy-kcal_100g"]
-                if "fat_100g" in p_json["products"][prod]["nutriments"]:
-                    self.fat = p_json["products"][prod]["nutriments"]["fat_100g"]
+                self.image = (
+                    p_json["products"][prod]["image_front_small_url"])
+                self.energy_kj = (
+                    p_json["products"][prod]["nutriments"]["energy_100g"])
+                if "energy-kcal_100g" in p_json(
+                        ["products"][prod]["nutriments"]):
+                    self.energy_kcal = p_json(
+                        ["products"][prod]["nutriments"]["energy-kcal_100g"])
+                if "fat_100g" in p_json(
+                        ["products"][prod]["nutriments"]):
+                    self.fat = p_json(
+                        ["products"][prod]["nutriments"]["fat_100g"])
                 if "fiber_100g" in p_json["products"][prod]["nutriments"]:
-                    self.fiber = p_json["products"][prod]["nutriments"]["fiber_100g"]
+                    self.fiber = p_json(
+                        ["products"][prod]["nutriments"]["fiber_100g"])
                 if "proteins_100g" in p_json["products"][prod]["nutriments"]:
-                    self.proteins = p_json["products"][prod]["nutriments"]["proteins_100g"]
+                    self.proteins = p_json(
+                        ["products"][prod]["nutriments"]["proteins_100g"])
                 if "salt_100g" in p_json["products"][prod]["nutriments"]:
-                    self.salt = p_json["products"][prod]["nutriments"]["salt_100g"]
+                    self.salt = p_json(
+                        ["products"][prod]["nutriments"]["salt_100g"])
                 extracted_product = Product(product_name=self.product_name,
                                             nutrition_grade=self.nutriscore,
                                             url=self.url,
@@ -180,3 +168,26 @@ if __name__ == "__main__":
 #     extracted_product = Product(**datas)
 #     extracted_product.save()
 #     save = False
+
+    # to_be_extracted = {"product_name": "product_name_fr",
+    #                    "nutriscore": "nutriscore_grade",
+    #                    "url": "url",
+    #                    "image": "image_front_small_url"}
+    # nutriments = {"energy_kj": "energy_100g",
+    #               "energy_kcal": "energy-kcal_100g",
+    #               "fat": "fat_100g",
+    #               "fiber": "fiber_100g",
+    #               "proteins": "proteins_100g",
+    #               "salt": "salt_100g"}
+    # for key, value in to_be_extracted.items():
+    #     if value in p_json["products"][prod]:
+    #         self.key = p_json["products"][prod][value]
+    #     else:
+    #         self.key = "no_name_in_database"
+    #     print("{} a pour valeur {}".format(key, self.key))
+    # for key, value in nutriments.items():
+    #     if value in p_json["products"][prod]["nutriments"]:
+    #         self.key = p_json["products"][prod]["nutriments"][value]
+    #     else:
+    #         self.key = "0"
+    #     print("{} a pour valeur {}".format(key, self.key))

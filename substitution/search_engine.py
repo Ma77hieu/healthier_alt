@@ -24,7 +24,8 @@ class Substitutes():
             self.prod_found = False
 
     def replace_spec_characs(self, input_string):
-        """make sure that specific characters such as 'é' 'à' are replaced with equivalents"""
+        """make sure that specific characters
+         such as 'é' 'à' are replaced with equivalents"""
         characs_and_subs = {"é": "e", "è": "e", "à": "a", "'": " ", "ù": "u"}
         count = 0
         normalized_string = input_string

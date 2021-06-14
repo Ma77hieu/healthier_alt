@@ -1,10 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from authentification.forms import UserForm
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import User
-from substitution.constants import LOG_IN_OK, LOG_OUT_OK, INVALID_CREDENTIALS
+from substitution.constants import LOG_IN_OK, INVALID_CREDENTIALS
 
 
 # Create your views here.
@@ -16,7 +15,7 @@ def login_user(request, user_name, pwd, signup):
                         password=pwd)
     if auth is not None:
         logged_user = login(request, auth)
-        if signup == True:
+        if signup is True:
             html_page = 'signin.html'
         else:
             html_page = 'user.html'
@@ -61,6 +60,7 @@ def signin_service(request):
         login = login_user(request, user_name, pwd, signup)
         if login == INVALID_CREDENTIALS:
             form = UserForm()
-            return ('signin.html', {'form': form, 'error': INVALID_CREDENTIALS})
+            return ('signin.html',
+                    {'form': form, 'error': INVALID_CREDENTIALS})
         else:
             return ('user.html', {'user_message': LOG_IN_OK})

@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from substitution.models import Product, Favorites
 from django.core.paginator import Paginator
 from .constants import NBR_RESULTS_PER_PAGE as per_page
@@ -31,7 +30,8 @@ class Services():
             search_match_product_id = alt.searched_product_id
             search_match_product = Product.objects.get(
                 pk=search_match_product_id)
-            # print("SEARCH_MATCH_PRODUCT: {}".format(search_match_product))
+            # print("SEARCH_MATCH_PRODUCT: {}".format(
+            #     search_match_product))
             # print("SEARCH_MATCH_PRODUCT IMAGE: {}".format(
             #     search_match_product.image_front_small_url))
             products = Product.objects.filter(pk__in=alt_products_ids)
@@ -68,7 +68,8 @@ class Services():
             favs = []
             for favorite in favorites:
                 # print("FAVORITE: {}".format(favorite))
-                # print("FAVORITE PRODUCT ID: {}".format(favorite["product_id"]))
+                # print("FAVORITE PRODUCT ID: {}".format(
+                #     favorite["product_id"]))
                 favs.append(favorite["product_id"])
 
             # print("IDs FAVORITES OF THE USER: {}".format(favs))
