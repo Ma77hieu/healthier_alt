@@ -1,4 +1,3 @@
-# from django.test import TestCase
 from decouple import config
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.chrome.webdriver import WebDriver
@@ -6,7 +5,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from substitution.constants import LOG_IN_OK, LOG_OUT_OK, WAIT_TIME
 import time
-# import logging
 
 
 class MySeleniumTests(StaticLiveServerTestCase):
